@@ -1,9 +1,9 @@
-09:00-10:00 | Gathering with Light Breakfast & Coffee | 
+09:00-10:00 | Gathering with Light Breakfast & Coffee ☕🥐🍽️
 10:00-10:20 | Opening | Tomer Gan-Or
 10:20-10:35 | Champion Customer Success | Meital Nagel
 10:35-11:00 | Tufinathon 2025  | Saar Demri
 11:00-11:20 | Tufin's AI Roadmap & Architecture | Nevo Tzirlin, Miri Tiomkin
-11:20-11:35 | Break | Recharge your batteries ☕🍎🍌
+11:20-11:35 | Break | Recharge your batteries ☕🍎🍫
 11:35-11:50 | How to build an OPM clinet using AI | Aviad Betesh, Shaked Eyal
 11:50-12:00 | R&D utilizing AI | Asi Elqayam, Nessy Aharon
 12:00-12:30 | The Price of Tech Debt| Ophir Radnitz + Adi
@@ -12,6 +12,6 @@
 13:00-14:00 | Lunch | The most productive meeting of the day 🍽️
 14:00-15:00 | AI and some more | Tal Fialkow, VP AI Cyber , Dream Security
 15:00-15:15 | R&D utilizing AI | Asi Elqayam, Nessy Aharon
-15:15-15:30 | Break | Recharge your batteries ☕🍎🍌
+15:15-15:30 | Break | Recharge your batteries ☕🍎🍫
 15:30-16:15 | Focus for 2026 | Shay Dayan
 16:00-16:15 | Wrap-Up & Q&A | Tomer Gan-Or

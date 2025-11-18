@@ -4,7 +4,7 @@
 10:35-11:00 | Tufinathon 2025  | Saar Demri
 11:00-11:20 | Tufin's AI Roadmap & Architecture | Nevo Tzirlin, Miri Tiomkin
 11:20-11:35 | Break | Recharge your batteries ☕🍎🍫
-11:35-11:50 | How to build an OPM clinet using AI | Aviad Betesh, Shaked Eyal
+11:35-11:50 | How to build an OPM Client using AI | Aviad Betesh, Shaked Eyal
 11:50-12:00 | R&D utilizing AI | Asi Elqayam, Nessy Aharon
 12:00-12:30 | The Price of Tech Debt| Ophir Radnitz + Adi
 12:30-12:45 | Telemetry Dive in| Ophir Radnitz
@@ -16,3 +16,4 @@
 15:30-16:15 | Focus for 2026 | Shay Dayan
 
 16:00-16:15 | Wrap-Up & Q&A | Tomer Gan-Or
+

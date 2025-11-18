@@ -175,55 +175,35 @@ header {
   </div>
 
   <script>
-    // --- Configuration -------------------------------------------------------
-    // By default, we load from a simple text file named schedule.txt
-    // with one line per item using the format:
-    //   HH:MM-HH:MM | Session Title | Speaker Name
-    // You can change the path below if you store it elsewhere.
-    // Optional: populate the hero area from query params on the URL like:
-    //   index.html?title=Dept%20Offsite&subtitle=Q4%20Kickoff&date=Nov%2012%202025&location=Tel%20Aviv
-    const params = new URLSearchParams(location.search);
-    const titleEl = document.getElementById('title');
-    const subtitleEl = document.getElementById('subtitle');
-    const dateEl = document.getElementById('date').querySelector('span');
-    const locationEl = document.getElementById('location').querySelector('span');
-    const SCHEDULE_PATH = './schedule.txt?v=' + Date.now();
+// --- Configuration -------------------------------------------------------
+const params = new URLSearchParams(location.search);
+const titleEl = document.getElementById('title');
+const subtitleEl = document.getElementById('subtitle');
+const dateEl = document.getElementById('date').querySelector('span');
+const locationEl = document.getElementById('location').querySelector('span');
+const SCHEDULE_PATH = './schedule.txt';
 
-    if (params.get('title')) titleEl.textContent = params.get('title');
-    if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
-    if (params.get('date')) dateEl.textContent = params.get('date');
-    if (params.get('location')) locationEl.textContent = params.get('location');
+...
+async function loadSchedule() {
+  statusEl.textContent = 'Loading schedule…';
+  agendaEl.innerHTML = '';
 
-    const agendaEl = document.getElementById('agenda');
-    const statusEl = document.getElementById('status');
-    const emptyEl = document.getElementById('emptyState');
-    const refreshBtn = document.getElementById('refreshBtn');
+  const url = new URL(SCHEDULE_PATH, location.href);
+  url.searchParams.set('_', Date.now()); // ✅ single timestamp cache-buster
 
-    refreshBtn.addEventListener('click', () => loadSchedule(true));
-
-    async function loadSchedule(bustCache = false) {
-      statusEl.textContent = 'Loading schedule…';
-      agendaEl.innerHTML = '';
-
-      // Cache-busting for local testing so file changes show up immediately
-      const url = new URL(SCHEDULE_PATH, location.href);
-      if (bustCache) url.searchParams.set('_', Date.now());
-
-      try {
-        const res = await fetch(url.toString());
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        const items = parseSchedule(text);
-        renderAgenda(items);
-        const updatedAt = new Date();
-        statusEl.textContent = `Loaded ${items.length} item${items.length === 1 ? '' : 's'} • ${updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Could not load schedule file.';
-        agendaEl.innerHTML = '';
-        emptyEl.style.display = 'block';
-      }
-    }
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const text = await res.text();
+    const items = parseSchedule(text);
+    renderAgenda(items);
+  } catch (err) {
+    console.error(err);
+    statusEl.textContent = 'Could not load schedule file.';
+    agendaEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+  }
+}
 
     function parseSchedule(raw) {
       // Supports comment lines that start with '#' and blank lines.

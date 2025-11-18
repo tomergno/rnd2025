@@ -37,28 +37,44 @@
 
     .container { max-width: 900px; margin: 0 auto; padding: 16px; }
 
-    header {
-      display: grid;
-      grid-template-columns: 72px 1fr;
-      gap: 16px;
-      align-items: center;
-      padding: 20px 12px 6px;
-      position: sticky;
-      top: 0;
-      backdrop-filter: blur(8px);
-      background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);
-      z-index: 10;
-      border-bottom: 1px solid rgba(148,163,184,0.15);
-    }
+header {
+  display: flex;
+  align-items: center;           /* vertically center logo + text */
+  gap: 24px;                     /* spacing between logo and titles */
+  padding: 22px 16px 10px;
+  position: sticky;
+  top: 0;
+  backdrop-filter: blur(8px);
+  background: #38CEED;/*linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);*/
+  z-index: 10;
+  border-bottom: 1px solid rgba(148,163,184,0.15);
+}
 
-    .logo {
-      width: 72px; height: 72px; border-radius: 16px; object-fit: contain; background: #0b1220; padding: 10px;
-      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.35);
-    }
+.logo {
+  width: 150px;                  /* slightly larger than before */
+  height: 50px;                  /* keep aspect ratio, just a bit taller */
+  object-fit: contain;
+  border-radius: 10px;
+  background: #0b1220;
+  padding: 8px;
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.06),
+              0 10px 30px rgba(0,0,0,0.35);
+}
 
-    .titles { display: grid; gap: 6px; padding-left: 36px; }
+.titles {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  padding-left: 0;               /* no extra offset needed */
+}
+
     h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; letter-spacing: 0.2px; }
-    .subtitle { color: var(--muted); font-size: 0.98rem; }
+    .subtitle { 
+      color: #065E6C; /* var(--muted); */
+      font-size: 1.5rem; 
+      margin-left: 6px
+    }
 
     .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
     .chip {
@@ -101,6 +117,7 @@
       .item { grid-template-columns: 1fr; gap: 6px; }
       .time { opacity: 0.9; }
     }
+
   </style>
 </head>
 <body>
@@ -109,8 +126,8 @@
       <!-- Replace ./logo.png with your logo file path -->
       <img class="logo" src="./logo.png" alt="Event logo" />
       <div class="titles">
-        <h1 id="title">Tufin R&D </h1>
-        <div class="subtitle" id="subtitle">Wrapping 2025,<br> Taking off to 2026</div>
+        <!--<h1 id="title">Tufin R&D </h1>-->
+        <div class="subtitle" id="subtitle"><strong>Wrapping 2025 🚀 Taking off to 2026</strong></div>
         <div class="meta">
           <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
           <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>

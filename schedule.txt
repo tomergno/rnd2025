@@ -1,17 +1,17 @@
+09:00-10:00 | Gathering with Light Breakfast & Coffee | 
 10:00-10:20 | Opening | Tomer Gan-Or
 10:20-10:35 | Champion Customer Success | Meital Nagel
-10:35-10:50 | How to improve the way R&D deals with escalations | Orasio Spieler, Alexey Yarilovets
-10:50-11:10 | Tufin's AI Roadmap & Architecture | Nevo Tzirlin, Miri Tiomkin
-11:10-11:20 | Ticket Uploader Tool | Tal Shachar, Nessy Aharon
+10:35-11:00 | Tufinathon 2025  | Saar Demri
+11:00-11:20 | Tufin's AI Roadmap & Architecture | Nevo Tzirlin, Miri Tiomkin
 11:20-11:35 | Break | Recharge your batteries ☕🍎🍌
-11:35-11:55 | How to build an OPM clinet using AI | Aviad Betesh, Shaked Eyal
-11:55-12:15 | The Price of Tech Debt| Ophir Radnitz
-12:15-12:45 | TOS Resources Consumption: Various Initiatives | Nevo Tzirlin
-12:45-13:00 | Violations limit – Architecture and lesson learned | Ran Abu Khala, Snir Schaibner
-13:00-14:00 | Lunch | The most productive meeting of the day 🍽️🚀🥗
+11:35-11:50 | How to build an OPM clinet using AI | Aviad Betesh, Shaked Eyal
+11:50-12:00 | R&D utilizing AI | Asi Elqayam, Nessy Aharon
+12:00-12:30 | The Price of Tech Debt| Ophir Radnitz + Adi
+12:30-12:45 | Telemetry Dive in| Ophir Radnitz
+12:45-13:00 | TOS Resources Consumption: Various Initiatives | Many Speakers
+13:00-14:00 | Lunch | The most productive meeting of the day 🍽️
 14:00-15:00 | AI and some more | Tal Fialkow, VP AI Cyber , Dream Security
-15:00-15:45 | Focus for 2026 | Shay Dayan
-15:45-16:00 | Break | Recharge your batteries ☕🍎🍌
-16:00-16:20 | Telemetry Dive in| Ophir Radnitz
-16:20-16:50 | Tufinathon 2025  | Saar Demri
-16:50-17:00 | Wrap-Up & Q&A | Tomer Gan-Or
+15:00-15:15 | R&D utilizing AI | Asi Elqayam, Nessy Aharon
+15:15-15:30 | Break | Recharge your batteries ☕🍎🍌
+15:30-16:15 | Focus for 2026 | Shay Dayan
+16:00-16:15 | Wrap-Up & Q&A | Tomer Gan-Or

@@ -74,11 +74,25 @@ header {
 }
 
     h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; letter-spacing: 0.2px; }
-    .subtitle { 
-      color: #065E6C; /* var(--muted); */
-      font-size: 1.5rem; 
-      margin-left: 6px
-    }
+
+/* Desktop: all spans inline (1 line) */
+.subtitle span {
+  display: inline;
+  margin-right: 6px;
+}
+
+/* Mobile: stack into 3 lines */
+@media (max-width: 640px) {
+  .subtitle span {
+    display: block;    /* each part on its own line */
+    text-align: center; /* optional: center align */
+  }
+
+  .subtitle {
+    font-size: 1.2rem; /* slightly smaller text */
+    line-height: 1.4;  /* more comfortable spacing */
+  }
+}
 
     .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
     .chip {
@@ -114,17 +128,13 @@ header {
 
     footer { color: var(--muted); text-align: center; padding: 32px 12px 60px; }
 
-   @media (max-width: 640px) {
-  header { gap: 12px; }
-  .logo {
-    width: 110px;
-    height: 36px;
-    border-radius: 8px;
-  }
-  h1 { font-size: 1.25rem; }
-  .item { grid-template-columns: 1fr; gap: 6px; }
-  .time { opacity: 0.9; }
-}
+    @media (max-width: 640px) {
+      header { grid-template-columns: 56px 1fr; gap: 12px; }
+      .logo { width: 56px; height: 56px; border-radius: 12px; }
+      h1 { font-size: 1.25rem; }
+      .item { grid-template-columns: 1fr; gap: 6px; }
+      .time { opacity: 0.9; }
+    }
 
   </style>
 </head>
@@ -135,7 +145,13 @@ header {
       <img class="logo" src="./logo.png" alt="Event logo" />
       <div class="titles">
         <!--<h1 id="title">Tufin R&D </h1>-->
-        <div class="subtitle" id="subtitle"><strong>Wrapping 2025 🚀 Taking off to 2026</strong></div>
+        <div class="subtitle" id="subtitle">
+        <strong>
+          <span class="line1">Wrapping 2025</span>
+          <span class="line2">🚀</span>
+          <span class="line3">Taking off to 2026</span>
+        </strong>
+</div>
         <div class="meta">
           <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
           <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>
@@ -164,7 +180,7 @@ header {
     // with one line per item using the format:
     //   HH:MM-HH:MM | Session Title | Speaker Name
     // You can change the path below if you store it elsewhere.
-    const SCHEDULE_PATH = './schedule.txt?v=' + Date.now();
+    const SCHEDULE_PATH = './schedule.txt';
 
     // Optional: populate the hero area from query params on the URL like:
     //   index.html?title=Dept%20Offsite&subtitle=Q4%20Kickoff&date=Nov%2012%202025&location=Tel%20Aviv
@@ -173,7 +189,7 @@ header {
     const subtitleEl = document.getElementById('subtitle');
     const dateEl = document.getElementById('date').querySelector('span');
     const locationEl = document.getElementById('location').querySelector('span');
-    
+    const SCHEDULE_PATH = './schedule.txt?v=' + Date.now();
 
     if (params.get('title')) titleEl.textContent = params.get('title');
     if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');

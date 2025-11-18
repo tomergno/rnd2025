@@ -5,10 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Department Offsite — Agenda</title>
   <meta name="description" content="Single‑page event schedule that loads items from an external file." />
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
-  <meta http-equiv="Pragma" content="no-cache" />
-  <meta http-equiv="Expires" content="0" />
-
   <style>
     
     /*to remove the refresh button */
@@ -41,58 +37,28 @@
 
     .container { max-width: 900px; margin: 0 auto; padding: 16px; }
 
-header {
-  display: flex;
-  align-items: center;           /* vertically center logo + text */
-  gap: 24px;                     /* spacing between logo and titles */
-  padding: 22px 16px 10px;
-  position: sticky;
-  top: 0;
-  backdrop-filter: blur(8px);
-  background: #38CEED;/*linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);*/
-  z-index: 10;
-  border-bottom: 1px solid rgba(148,163,184,0.15);
-}
+    header {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 12px 6px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);
+      z-index: 10;
+      border-bottom: 1px solid rgba(148,163,184,0.15);
+    }
 
-.logo {
-  width: 150px;                  /* slightly larger than before */
-  height: 50px;                  /* keep aspect ratio, just a bit taller */
-  object-fit: contain;
-  border-radius: 10px;
-  background: #0b1220;
-  padding: 8px;
-  box-shadow: 0 0 0 1px rgba(255,255,255,0.06),
-              0 10px 30px rgba(0,0,0,0.35);
-}
+    .logo {
+      width: 72px; height: 72px; border-radius: 16px; object-fit: contain; background: #0b1220; padding: 10px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.35);
+    }
 
-.titles {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  padding-left: 0;               /* no extra offset needed */
-}
-
+    .titles { display: grid; gap: 6px; padding-left: 36px; }
     h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; letter-spacing: 0.2px; }
-
-/* Desktop: all spans inline (1 line) */
-.subtitle span {
-  display: inline;
-  margin-right: 6px;
-}
-
-/* Mobile: stack into 3 lines */
-@media (max-width: 640px) {
-  .subtitle span {
-    display: block;    /* each part on its own line */
-    text-align: center; /* optional: center align */
-  }
-
-  .subtitle {
-    font-size: 1.2rem; /* slightly smaller text */
-    line-height: 1.4;  /* more comfortable spacing */
-  }
-}
+    .subtitle { color: var(--muted); font-size: 0.98rem; }
 
     .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
     .chip {
@@ -135,7 +101,6 @@ header {
       .item { grid-template-columns: 1fr; gap: 6px; }
       .time { opacity: 0.9; }
     }
-
   </style>
 </head>
 <body>
@@ -144,14 +109,8 @@ header {
       <!-- Replace ./logo.png with your logo file path -->
       <img class="logo" src="./logo.png" alt="Event logo" />
       <div class="titles">
-        <!--<h1 id="title">Tufin R&D </h1>-->
-        <div class="subtitle" id="subtitle">
-        <strong>
-          <span class="line1">Wrapping 2025</span>
-          <span class="line2">🚀</span>
-          <span class="line3">Taking off to 2026</span>
-        </strong>
-</div>
+        <h1 id="title">Tufin R&D </h1>
+        <div class="subtitle" id="subtitle">Wrapping 2025,<br> Taking off to 2026</div>
         <div class="meta">
           <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
           <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>
@@ -175,35 +134,56 @@ header {
   </div>
 
   <script>
-// --- Configuration -------------------------------------------------------
-const params = new URLSearchParams(location.search);
-const titleEl = document.getElementById('title');
-const subtitleEl = document.getElementById('subtitle');
-const dateEl = document.getElementById('date').querySelector('span');
-const locationEl = document.getElementById('location').querySelector('span');
-const SCHEDULE_PATH = './schedule.txt';
+    // --- Configuration -------------------------------------------------------
+    // By default, we load from a simple text file named schedule.txt
+    // with one line per item using the format:
+    //   HH:MM-HH:MM | Session Title | Speaker Name
+    // You can change the path below if you store it elsewhere.
+    const SCHEDULE_PATH = './schedule.txt';
 
-...
-async function loadSchedule() {
-  statusEl.textContent = 'Loading schedule…';
-  agendaEl.innerHTML = '';
+    // Optional: populate the hero area from query params on the URL like:
+    //   index.html?title=Dept%20Offsite&subtitle=Q4%20Kickoff&date=Nov%2012%202025&location=Tel%20Aviv
+    const params = new URLSearchParams(location.search);
+    const titleEl = document.getElementById('title');
+    const subtitleEl = document.getElementById('subtitle');
+    const dateEl = document.getElementById('date').querySelector('span');
+    const locationEl = document.getElementById('location').querySelector('span');
 
-  const url = new URL(SCHEDULE_PATH, location.href);
-  url.searchParams.set('_', Date.now()); // ✅ single timestamp cache-buster
+    if (params.get('title')) titleEl.textContent = params.get('title');
+    if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
+    if (params.get('date')) dateEl.textContent = params.get('date');
+    if (params.get('location')) locationEl.textContent = params.get('location');
 
-  try {
-    const res = await fetch(url);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const text = await res.text();
-    const items = parseSchedule(text);
-    renderAgenda(items);
-  } catch (err) {
-    console.error(err);
-    statusEl.textContent = 'Could not load schedule file.';
-    agendaEl.innerHTML = '';
-    emptyEl.style.display = 'block';
-  }
-}
+    const agendaEl = document.getElementById('agenda');
+    const statusEl = document.getElementById('status');
+    const emptyEl = document.getElementById('emptyState');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    refreshBtn.addEventListener('click', () => loadSchedule(true));
+
+    async function loadSchedule(bustCache = false) {
+      statusEl.textContent = 'Loading schedule…';
+      agendaEl.innerHTML = '';
+
+      // Cache-busting for local testing so file changes show up immediately
+      const url = new URL(SCHEDULE_PATH, location.href);
+      if (bustCache) url.searchParams.set('_', Date.now());
+
+      try {
+        const res = await fetch(url.toString());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const items = parseSchedule(text);
+        renderAgenda(items);
+        const updatedAt = new Date();
+        statusEl.textContent = `Loaded ${items.length} item${items.length === 1 ? '' : 's'} • ${updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Could not load schedule file.';
+        agendaEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+      }
+    }
 
     function parseSchedule(raw) {
       // Supports comment lines that start with '#' and blank lines.

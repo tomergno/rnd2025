@@ -5,6 +5,10 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Department Offsite — Agenda</title>
   <meta name="description" content="Single‑page event schedule that loads items from an external file." />
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+
   <style>
     
     /*to remove the refresh button */
@@ -165,6 +169,7 @@ header {
     const subtitleEl = document.getElementById('subtitle');
     const dateEl = document.getElementById('date').querySelector('span');
     const locationEl = document.getElementById('location').querySelector('span');
+    const SCHEDULE_PATH = './schedule.txt?v=' + Date.now();
 
     if (params.get('title')) titleEl.textContent = params.get('title');
     if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');

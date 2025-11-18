@@ -6,11 +6,11 @@
   <title>Department Offsite — Agenda</title>
   <meta name="description" content="Single‑page event schedule that loads items from an external file." />
   <style>
-    
+
     /*to remove the refresh button */
     #refreshBtn,
     #status {
-    display: none;
+      display: none;
     }
 
     :root {
@@ -28,8 +28,8 @@
       margin: 0;
       font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       background: radial-gradient(1200px 800px at 20% -10%, rgba(34,211,238,0.06), transparent 60%),
-                  radial-gradient(1000px 600px at 120% 10%, rgba(99,102,241,0.08), transparent 50%),
-                  var(--bg);
+      radial-gradient(1000px 600px at 120% 10%, rgba(99,102,241,0.08), transparent 50%),
+      var(--bg);
       color: var(--text);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -46,12 +46,13 @@
       position: sticky;
       top: 0;
       backdrop-filter: blur(8px);
-      background:#38CEED; /*linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);*/
+      background:#B5DEE4; /*linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);*/
       z-index: 10;
       border-bottom: 1px solid rgba(148,163,184,0.15);
     }
 
-    .logo {
+    .logo 
+    {
       width: 72px; 
       height: 28px; 
       border-radius: 16px; 
@@ -63,14 +64,32 @@
       box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.35);
     }
 
-    .titles { display: grid; gap: 6px; padding-left: 36px; }
-    h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; letter-spacing: 0.2px; }
+    .titles { display: grid; gap: 6px; padding-left: 26px; }
+    h1 { 
+      margin: 0; 
+      font-size: 1.625rem; 
+      line-height: 1.2; 
+      letter-spacing: 0.2px; }
     .subtitle { color: var(--muted); font-size: 0.98rem; }
 
-    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .meta { 
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 6px;
+      justify-content: flex-start;  /* 👈 ensures left alignment */
+      align-items: flex-start;      /* keeps them aligned at the top edge */
+      margin-left: -115px;
+    }
     .chip {
-      display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px;
-      background: var(--chip); color: var(--text); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.06);
+        background: none;        /* remove dark background */
+        border: none;            /* remove border */
+        border-radius: 0;        /* remove rounded shape */
+        padding: 0;              /* remove bubble spacing */
+        color: #000000;          /* make text black (adjust if needed) */
+        font-size: 0.9rem;         /* match your header text size */
+        font-weight: 400;        /* keep it bold */
+        display: inline;         /* ensures it behaves like normal text */
     }
 
     main { padding: 24px 12px 48px; }
@@ -88,21 +107,21 @@
 
     .agenda { display: grid; gap: 10px; }
 
-.rocket {
-  display: inline-block;     /* keeps it inline with text */
-  padding-left: 1.2cm;       /* your existing horizontal offset */
-  font-size: 1.5em;          /* size of the emoji */
-  animation: spin 3s linear infinite;  /* 👈 rotates continuously */
-  transform-origin: center;  /* spin around its center */
-}
+    .rocket {
+      display: inline-block;     /* keeps it inline with text */
+      padding-left: 1.2cm;       /* your existing horizontal offset */
+      font-size: 1.5em;          /* size of the emoji */
+      animation: spin 3s linear infinite;  /* 👈 rotates continuously */
+      transform-origin: center;  /* spin around its center */
+    }
 
-@keyframes spin {
-  from { transform: rotate(0deg); }
-  to   { transform: rotate(360deg); }
-}
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to   { transform: rotate(360deg); }
+    }
 
     .subtitle {
-      color: #065E6C;      /* white text */
+      color: #001F3F;      /* white text */
       font-weight: 700;    /* bold */
     }
 
@@ -135,91 +154,91 @@
       <img class="logo" src="./logo.png" alt="Event logo" />
       <div class="titles">
        <!-- <h1 id="title">Tufin R&D </h1>-->
-     
-      <div class="subtitle" id="subtitle">Wrapping 2025,<br> <span class="rocket">🚀</span>Taking off to 2026 </div>
-      <div class="meta">
-          <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
-          <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>
-        </div>
+
+       <div class="subtitle" id="subtitle">Wrapping 2025,<br> <span class="rocket">🚀</span>Taking off to 2026 </div>
+       <div class="meta">
+        <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
+        <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>
       </div>
-    </header>
+    </div>
+  </header>
 
-    <main>
-      <div class="toolbar">
-        <div class="status" id="status">Loading schedule…</div>
-        <button class="refresh" id="refreshBtn" aria-label="Refresh schedule">↻ Refresh</button>
-      </div>
+  <main>
+    <div class="toolbar">
+      <div class="status" id="status">Loading schedule…</div>
+      <button class="refresh" id="refreshBtn" aria-label="Refresh schedule">↻ Refresh</button>
+    </div>
 
-      <section class="agenda" id="agenda" aria-live="polite"></section>
+    <section class="agenda" id="agenda" aria-live="polite"></section>
 
-      <div class="empty" id="emptyState" style="display:none;">No items yet. Update <code>schedule.txt</code> to see sessions here.</div>
-    </main>
+    <div class="empty" id="emptyState" style="display:none;">No items yet. Update <code>schedule.txt</code> to see sessions here.</div>
+  </main>
 
-    <footer>
-    </footer>
-  </div>
+  <footer>
+  </footer>
+</div>
 
-  <script>
+<script>
     // --- Configuration -------------------------------------------------------
     // By default, we load from a simple text file named schedule.txt
     // with one line per item using the format:
     //   HH:MM-HH:MM | Session Title | Speaker Name
     // You can change the path below if you store it elsewhere.
-    const SCHEDULE_PATH = './schedule.txt';
+  const SCHEDULE_PATH = './schedule.txt';
 
     // Optional: populate the hero area from query params on the URL like:
     //   index.html?title=Dept%20Offsite&subtitle=Q4%20Kickoff&date=Nov%2012%202025&location=Tel%20Aviv
-    const params = new URLSearchParams(location.search);
-    const titleEl = document.getElementById('title');
-    const subtitleEl = document.getElementById('subtitle');
-    const dateEl = document.getElementById('date').querySelector('span');
-    const locationEl = document.getElementById('location').querySelector('span');
+  const params = new URLSearchParams(location.search);
+  const titleEl = document.getElementById('title');
+  const subtitleEl = document.getElementById('subtitle');
+  const dateEl = document.getElementById('date').querySelector('span');
+  const locationEl = document.getElementById('location').querySelector('span');
 
-    if (params.get('title')) titleEl.textContent = params.get('title');
-    if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
-    if (params.get('date')) dateEl.textContent = params.get('date');
-    if (params.get('location')) locationEl.textContent = params.get('location');
+  if (params.get('title')) titleEl.textContent = params.get('title');
+  if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
+  if (params.get('date')) dateEl.textContent = params.get('date');
+  if (params.get('location')) locationEl.textContent = params.get('location');
 
-    const agendaEl = document.getElementById('agenda');
-    const statusEl = document.getElementById('status');
-    const emptyEl = document.getElementById('emptyState');
-    const refreshBtn = document.getElementById('refreshBtn');
+  const agendaEl = document.getElementById('agenda');
+  const statusEl = document.getElementById('status');
+  const emptyEl = document.getElementById('emptyState');
+  const refreshBtn = document.getElementById('refreshBtn');
 
-    refreshBtn.addEventListener('click', () => loadSchedule(true));
+  refreshBtn.addEventListener('click', () => loadSchedule(true));
 
-    async function loadSchedule(bustCache = false) {
-      statusEl.textContent = 'Loading schedule…';
-      agendaEl.innerHTML = '';
+  async function loadSchedule(bustCache = false) {
+    statusEl.textContent = 'Loading schedule…';
+    agendaEl.innerHTML = '';
 
       // Cache-busting for local testing so file changes show up immediately
-      const url = new URL(SCHEDULE_PATH, location.href);
-      if (bustCache) url.searchParams.set('_', Date.now());
+    const url = new URL(SCHEDULE_PATH, location.href);
+    if (bustCache) url.searchParams.set('_', Date.now());
 
-      try {
-        const res = await fetch(url.toString());
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const text = await res.text();
-        const items = parseSchedule(text);
-        renderAgenda(items);
-        const updatedAt = new Date();
-        statusEl.textContent = `Loaded ${items.length} item${items.length === 1 ? '' : 's'} • ${updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
-      } catch (err) {
-        console.error(err);
-        statusEl.textContent = 'Could not load schedule file.';
-        agendaEl.innerHTML = '';
-        emptyEl.style.display = 'block';
-      }
+    try {
+      const res = await fetch(url.toString());
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const text = await res.text();
+      const items = parseSchedule(text);
+      renderAgenda(items);
+      const updatedAt = new Date();
+      statusEl.textContent = `Loaded ${items.length} item${items.length === 1 ? '' : 's'} • ${updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
+    } catch (err) {
+      console.error(err);
+      statusEl.textContent = 'Could not load schedule file.';
+      agendaEl.innerHTML = '';
+      emptyEl.style.display = 'block';
     }
+  }
 
-    function parseSchedule(raw) {
+  function parseSchedule(raw) {
       // Supports comment lines that start with '#' and blank lines.
       // Each valid line is expected to be: time | session | speaker
-      const lines = raw.split(/\r?\n/);
-      const items = [];
-      for (const line of lines) {
-        const trimmed = line.trim();
-        if (!trimmed || trimmed.startsWith('#')) continue;
-        const parts = trimmed.split('|').map(p => p.trim());
+    const lines = raw.split(/\r?\n/);
+    const items = [];
+    for (const line of lines) {
+      const trimmed = line.trim();
+      if (!trimmed || trimmed.startsWith('#')) continue;
+      const parts = trimmed.split('|').map(p => p.trim());
         if (parts.length < 3) continue; // malformed line
         const [time, session, speaker] = parts;
         items.push({ time, session, speaker });

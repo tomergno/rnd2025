@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Department Offsite — Agenda</title>
+  <meta name="description" content="Single‑page event schedule that loads items from an external file." />
+  <style>
+    
+    /*to remove the refresh button */
+    #refreshBtn,
+    #status {
+    display: none;
+    }
+
+    :root {
+      --bg: #0f172a;            /* slate-900 */
+      --card: #111827;          /* gray-900 */
+      --muted: #94a3b8;         /* slate-400 */
+      --text: #e5e7eb;          /* gray-200 */
+      --accent: #22d3ee;        /* cyan-400 */
+      --chip: #1f2937;          /* gray-800 */
+      --ring: rgba(34, 211, 238, 0.35);
+    }
+
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Noto Sans, Ubuntu, Cantarell, Helvetica Neue, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: radial-gradient(1200px 800px at 20% -10%, rgba(34,211,238,0.06), transparent 60%),
+                  radial-gradient(1000px 600px at 120% 10%, rgba(99,102,241,0.08), transparent 50%),
+                  var(--bg);
+      color: var(--text);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+
+    header {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 16px;
+      align-items: center;
+      padding: 20px 12px 6px;
+      position: sticky;
+      top: 0;
+      backdrop-filter: blur(8px);
+      background: linear-gradient(to bottom, rgba(15,23,42,0.9), rgba(15,23,42,0.6) 70%, transparent);
+      z-index: 10;
+      border-bottom: 1px solid rgba(148,163,184,0.15);
+    }
+
+    .logo {
+      width: 72px; height: 72px; border-radius: 16px; object-fit: contain; background: #0b1220; padding: 10px;
+      box-shadow: 0 0 0 1px rgba(255,255,255,0.06), 0 10px 30px rgba(0,0,0,0.35);
+    }
+
+    .titles { display: grid; gap: 6px; padding-left: 36px; }
+    h1 { margin: 0; font-size: 1.625rem; line-height: 1.2; letter-spacing: 0.2px; }
+    .subtitle { color: var(--muted); font-size: 0.98rem; }
+
+    .meta { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+    .chip {
+      display: inline-flex; align-items: center; gap: 8px; padding: 6px 10px; border-radius: 999px;
+      background: var(--chip); color: var(--text); font-size: 0.9rem; border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    main { padding: 24px 12px 48px; }
+
+    .toolbar { display: flex; justify-content: space-between; align-items: center; margin: 8px 0 16px; }
+    .status { color: var(--muted); font-size: 0.9rem; }
+
+    button.refresh {
+      appearance: none; border: 1px solid rgba(34,211,238,0.45); background: linear-gradient(180deg, rgba(34,211,238,0.08), rgba(34,211,238,0.02));
+      color: var(--text); padding: 8px 12px; border-radius: 10px; font-weight: 600; cursor: pointer;
+      box-shadow: 0 0 0 0 rgba(34,211,238,0.0); transition: box-shadow .2s ease, transform .06s ease;
+    }
+    button.refresh:active { transform: translateY(1px); }
+    button.refresh:focus-visible { outline: none; box-shadow: 0 0 0 4px var(--ring); }
+
+    .agenda { display: grid; gap: 10px; }
+
+    .item {
+      display: grid; grid-template-columns: 120px 1fr; gap: 14px; align-items: start;
+      background: var(--card); padding: 14px; border-radius: 16px; border: 1px solid rgba(255,255,255,0.06);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    }
+    .time { font-variant-numeric: tabular-nums; font-weight: 700; letter-spacing: 0.3px; }
+    .session { font-size: 1.02rem; font-weight: 600; }
+    .speaker { color: var(--muted); }
+
+    .empty { color: var(--muted); padding: 16px; text-align: center; border: 1px dashed rgba(148,163,184,0.35); border-radius: 12px; }
+
+    footer { color: var(--muted); text-align: center; padding: 32px 12px 60px; }
+
+    @media (max-width: 640px) {
+      header { grid-template-columns: 56px 1fr; gap: 12px; }
+      .logo { width: 56px; height: 56px; border-radius: 12px; }
+      h1 { font-size: 1.25rem; }
+      .item { grid-template-columns: 1fr; gap: 6px; }
+      .time { opacity: 0.9; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <!-- Replace ./logo.png with your logo file path -->
+      <img class="logo" src="./logo.png" alt="Event logo" />
+      <div class="titles">
+        <h1 id="title">Tufin R&D </h1>
+        <div class="subtitle" id="subtitle">Wrapping 2025,<br> Taking off to 2026</div>
+        <div class="meta">
+          <div class="chip" id="date">📅 <span style="margin-left: 6px">December 14, 2025</span></div>
+          <div class="chip" id="location">📍 <span style="margin-left: 6px">Crown Plaza, Tel Aviv</span></div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <div class="toolbar">
+        <div class="status" id="status">Loading schedule…</div>
+        <button class="refresh" id="refreshBtn" aria-label="Refresh schedule">↻ Refresh</button>
+      </div>
+
+      <section class="agenda" id="agenda" aria-live="polite"></section>
+
+      <div class="empty" id="emptyState" style="display:none;">No items yet. Update <code>schedule.txt</code> to see sessions here.</div>
+    </main>
+
+    <footer>
+    </footer>
+  </div>
+
+  <script>
+    // --- Configuration -------------------------------------------------------
+    // By default, we load from a simple text file named schedule.txt
+    // with one line per item using the format:
+    //   HH:MM-HH:MM | Session Title | Speaker Name
+    // You can change the path below if you store it elsewhere.
+    const SCHEDULE_PATH = './schedule.txt';
+
+    // Optional: populate the hero area from query params on the URL like:
+    //   index.html?title=Dept%20Offsite&subtitle=Q4%20Kickoff&date=Nov%2012%202025&location=Tel%20Aviv
+    const params = new URLSearchParams(location.search);
+    const titleEl = document.getElementById('title');
+    const subtitleEl = document.getElementById('subtitle');
+    const dateEl = document.getElementById('date').querySelector('span');
+    const locationEl = document.getElementById('location').querySelector('span');
+
+    if (params.get('title')) titleEl.textContent = params.get('title');
+    if (params.get('subtitle')) subtitleEl.textContent = params.get('subtitle');
+    if (params.get('date')) dateEl.textContent = params.get('date');
+    if (params.get('location')) locationEl.textContent = params.get('location');
+
+    const agendaEl = document.getElementById('agenda');
+    const statusEl = document.getElementById('status');
+    const emptyEl = document.getElementById('emptyState');
+    const refreshBtn = document.getElementById('refreshBtn');
+
+    refreshBtn.addEventListener('click', () => loadSchedule(true));
+
+    async function loadSchedule(bustCache = false) {
+      statusEl.textContent = 'Loading schedule…';
+      agendaEl.innerHTML = '';
+
+      // Cache-busting for local testing so file changes show up immediately
+      const url = new URL(SCHEDULE_PATH, location.href);
+      if (bustCache) url.searchParams.set('_', Date.now());
+
+      try {
+        const res = await fetch(url.toString());
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const text = await res.text();
+        const items = parseSchedule(text);
+        renderAgenda(items);
+        const updatedAt = new Date();
+        statusEl.textContent = `Loaded ${items.length} item${items.length === 1 ? '' : 's'} • ${updatedAt.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
+      } catch (err) {
+        console.error(err);
+        statusEl.textContent = 'Could not load schedule file.';
+        agendaEl.innerHTML = '';
+        emptyEl.style.display = 'block';
+      }
+    }
+
+    function parseSchedule(raw) {
+      // Supports comment lines that start with '#' and blank lines.
+      // Each valid line is expected to be: time | session | speaker
+      const lines = raw.split(/\r?\n/);
+      const items = [];
+      for (const line of lines) {
+        const trimmed = line.trim();
+        if (!trimmed || trimmed.startsWith('#')) continue;
+        const parts = trimmed.split('|').map(p => p.trim());
+        if (parts.length < 3) continue; // malformed line
+        const [time, session, speaker] = parts;
+        items.push({ time, session, speaker });
+      }
+
+      // Optional: sort by start time if all items follow HH:MM-HH:MM
+      items.sort((a, b) => toMinutes(a.time) - toMinutes(b.time));
+      return items;
+    }
+
+    function toMinutes(range) {
+      // Extract the first HH:MM as start time
+      const m = /^(\d{1,2}):(\d{2})/.exec(range);
+      if (!m) return Number.MAX_SAFE_INTEGER;
+      return parseInt(m[1], 10) * 60 + parseInt(m[2], 10);
+    }
+
+    function renderAgenda(items) {
+      emptyEl.style.display = items.length ? 'none' : 'block';
+      const frag = document.createDocumentFragment();
+      for (const { time, session, speaker } of items) {
+        const card = document.createElement('article');
+        card.className = 'item';
+        card.innerHTML = `
+          <div class="time">${escapeHTML(time)}</div>
+          <div>
+            <div class="session">${escapeHTML(session)}</div>
+            <div class="speaker">${escapeHTML(speaker)}</div>
+          </div>
+        `;
+        frag.appendChild(card);
+      }
+      agendaEl.replaceChildren(frag);
+    }
+
+    function escapeHTML(str) {
+      return str.replace(/[&<>"']/g, (ch) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[ch]);
+    }
+
+    // Kick off
+    loadSchedule();
+  </script>
+</body>
+</html>

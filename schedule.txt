@@ -1,7 +1,7 @@
 09:00-10:00 | Coffee, Croissants & Conversations | ☕🥐🍽️ 
 10:00-10:20 | Opening | Tomer Gan-Or
 10:20-10:35 | Champion Customer Success | Meital Nagel
-10:35-10:50 | How to improve the way R&D deals with escalations | Orasio Spieler, Alexey Yarilovets
+10:35-10:50 | Solving the Service Mysteries with Grafana | Orasio Spieler, Alexey Yarilovets
 10:50-11:10 | Tufin's AI Roadmap & Architecture | Nevo Tzirlin, Miri Tiomkin
 11:10-11:20 | The Bosch Lab and Ticket Uploader Story | Tal Shachar, Nessy Aharon
 11:20-11:35 | Break | Recharge your batteries ☕🍎🍌
@@ -15,6 +15,7 @@
 15:15-15:35 | Telemetry Dive in| Ophir Radnitz
 15:35-16:20 | Focus for 2026 | Shay Dayan
 16:20-16:30 | Wrap & Clap 👏 | Tomer Gan-Or
+
 
 
 

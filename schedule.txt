@@ -6,13 +6,14 @@
 11:10-11:20 | The Bosch Lab and Ticket Uploader Story | Tal Shachar, Nessy Aharon
 11:20-11:35 | Break | Recharge your batteries 🍎☕🍌
 11:35-11:55 | How to build an OPM client using AI | Aviad Betesh, Shaked Eyal
-11:55-12:15 | The Price of Tech Debt| Ophir Radnitz
+11:55-12:15 | The Cost of Tech Debt| Ophir Radnitz
 12:15-12:45 | TOS Resources Consumption: Various Initiatives | Nevo Tzirlin
 12:45-13:00 | When Limits Matter | Ran Abu Khala, Snir Schaibner
 13:00-14:00 | Lunch | Chew & Chat 🍽️🚀🥗
 14:00-15:00 | Teaching Old Networks New Tricks | Guest Lecturer - Tal Fialkow, VP AI Cyber, Dream Security
 15:00-15:15 | Break | Recharge your batteries 🍎☕🍌
-15:15-15:35 | Telemetry Dive in| Ophir Radnitz
+15:15-15:35 | Under the Hood: The Secrets of Telemetry | Ophir Radnitz
 15:35-16:20 | Focus for 2026 | Shay Dayan
 16:20-16:30 | Wrap & Clap 👏 | Tomer Gan-Or
+
 

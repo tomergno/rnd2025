@@ -1,4 +1,4 @@
-09:00-10:00 | Coffee, Croissants & Conversations | ☕🥐🍽️
+09:00-10:00 | Coffee, Croissants, Conversations | ☕🥐🍽️
 10:00-10:20 | Opening | Tomer Gan-Or
 10:20-10:35 | Champion Customer Success | Meital Nagel
 10:35-10:50 | Solving the Service Mysteries with Grafana | Orasio Spieler, Alexey Yarilovets
@@ -15,6 +15,7 @@
 15:15-15:35 | Under the Hood: The Secrets of Telemetry | Ophir Radnitz
 15:35-16:20 | Focus for 2026 | Shay Dayan
 16:20-16:30 | Wrap & Clap 👏 | Tomer Gan-Or
+
 
 
 
